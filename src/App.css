@@ -1,0 +1,132 @@
+/* Left sidebar scroll */
+.left-contents {
+	max-height: calc(100vh - 140px); /* 헤더/푸터 여백 고려 */
+	overflow: auto;
+	position: sticky;
+	top: 80px; /* 네비바 높이에 맞춤 */
+}
+
+/* 좁은 화면에서는 스티키 해제 */
+@media (max-width: 992px) {
+	.left-contents {
+		position: static;
+		max-height: none;
+	}
+}
+
+/* Left sidebar scroll + background */
+.left-contents {
+	max-height: calc(100vh - 140px);
+	overflow: auto;
+	position: sticky;
+	top: 80px;
+
+	/* light gray background */
+	background-color: #f8f9fa; /* 부트스트랩 bg-light 톤 */
+	border-right: 1px solid #e9ecef;
+	padding: 12px;
+	border-radius: 6px;
+}
+
+/* 좁은 화면에서는 스티키 해제 */
+@media (max-width: 992px) {
+	.left-contents {
+		position: static;
+		max-height: none;
+	}
+}
+
+/* Estimate page layout: center pair (left panel + A4) */
+.estimate-layout {
+	display: flex;
+	align-items: flex-start;
+	gap: 0;
+	/* 좌/우 동일 여백 */
+	max-width: calc(360px + 210mm); /* 좌측 360px + A4 */
+	width: 100%;
+	margin-inline: auto;            /* 중앙 정렬 */
+	padding-inline: 16px;           /* 양쪽 동일 패딩 */
+	box-sizing: border-box;
+}
+
+/* 좌측 스크롤 패널 */
+.left-contents {
+	max-height: calc(100vh - 140px);
+	overflow: auto;
+	position: sticky;
+	top: 80px;
+	border-right: 1px solid #e9ecef;
+}
+
+/* A4 size */
+.a4, .a4-paper {
+	width: 210mm;
+	min-height: auto; /* 내용에 따라 늘어나도록 */
+	height: auto;
+	background: #fff;
+}
+
+@media print {
+	@page {
+		size: A4;
+		margin: 10mm; /* 프린터 여백 */
+	}
+
+	html, body {
+		height: auto;
+	}
+
+	body {
+		margin: 0 !important;
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+	}
+
+	/* A4 내용이 페이지 안에 정확히 들어오도록 */
+	.a4, .a4-paper {
+		/* 페이지 여백(10mm 양쪽) 고려한 실제 폭 */
+		width: 190mm;
+		box-sizing: border-box;
+
+		/* 고정 높이 제거 → 내용에 맞게 늘어남 */
+		min-height: auto;
+		height: auto;
+
+		/* 인쇄 시 그림자 제거 */
+		box-shadow: none !important;
+		position: static;
+		overflow: visible;
+	}
+
+	/* 표가 페이지 바닥에서 잘리지 않도록 제어 */
+	table { page-break-inside: auto; }
+	thead { display: table-header-group; }
+	tfoot { display: table-footer-group; }
+	tr, td, th { page-break-inside: avoid; page-break-after: auto; }
+
+	/* 인쇄 영역만 보이게 */
+	body * { visibility: hidden; }
+	.print-area, .print-area * { visibility: visible; }
+	.print-area { margin: 0; }
+
+	/* 비고를 다음 페이지에서 시작 */
+	.print-break-before {
+		page-break-before: always;
+		break-before: page;
+	}
+
+	/* 비고 블록은 한 페이지 안에서 쪼개지지 않게 */
+	.no-break {
+		page-break-inside: avoid;
+		break-inside: avoid;
+	}
+
+	/* 하단 잘림 방지: A4 하단 여백 확보 */
+	.a4, .a4-paper {
+		box-sizing: border-box;
+		padding-bottom: 8mm !important;
+		min-height: auto;
+		height: auto;
+		overflow: visible !important;
+	}
+}
