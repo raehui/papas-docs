@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App.jsx";
 
-import Estimate from '../pages/estimate.jsx';
+import Estimate from '../pages/Estimate.jsx';
 import Home from "../pages/Home.jsx";
 import Result from "../pages/Result.jsx"
 
