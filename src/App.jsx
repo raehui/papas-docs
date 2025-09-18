@@ -3,7 +3,7 @@ import { useState } from 'react'
 import './App.css'
 import IndexNavBar from './components/IndexNavBar'
 import { Container } from 'react-bootstrap'
-import Footer from './components/footer'
+import Footer from './components/Footer'
 import { Navigate, useNavigate, useOutlet } from 'react-router-dom'
 import Home from './pages/Home'
 
