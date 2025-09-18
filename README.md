@@ -1,5 +1,5 @@
 # 파쓰문서
-d21p1u6w2ro5bb.cloudfront.net
+https://d21p1u6w2ro5bb.cloudfront.net/
 
 
 ## 개발일지
