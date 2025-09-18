@@ -1,6 +1,7 @@
+import { Alert } from 'bootstrap';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const Result = () => {
@@ -22,7 +23,7 @@ const Result = () => {
 	// 공급가액 합계 + 세액 
 	const grand = useMemo(() => supplyTotal + vat, [supplyTotal, vat]);
 
-	
+
 
 	// pdf 다운로드 
 	const handleDownload = async () => {
@@ -32,7 +33,7 @@ const Result = () => {
 
 		// 다운할 영역을 캔버스로 가져오고
 		const canvas = await html2canvas(element, {
-			scale:2,
+			scale: 2,
 			useCORSL: true
 		});
 		// 그걸 이미지 데이터로 변경
@@ -50,7 +51,10 @@ const Result = () => {
 		pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
 		// 최종적으로 PDF 다운로드(파일명: download.pdf)
 		pdf.save("견적서.pdf");
+
 	}
+	// 내보내기 알림창 초기값
+	const [addnotiState, setAddnotiState] = useState(false);
 
 
 
@@ -65,10 +69,19 @@ const Result = () => {
 
 	return (
 		<>
+			{/* 내보내기 성공 시 알림창 */}
+			{addnotiState && <div className="alert alert-success" role="alert">
+				견적서가 다운로드 됐습니다.
+			</div>}
 			<div className="d-flex justify-content-between mb-3">
-				<button className="btn btn-outline-secondary" onClick={() => navigate('/estimate', {state: {form, items}})}>← 문서 수정</button>
-				<button className="btn btn-primary" onClick={handleDownload}>내보내기 →</button>
-			</div>
+				<button className="btn btn-outline-secondary" onClick={() => navigate('/estimate', { state: { form, items } })}>← 문서 수정</button>
+				<button className="btn btn-primary"
+					onClick={async () => {
+						await handleDownload();
+						setAddnotiState(true);
+					}}
+				>내보내기 →</button>
+			</div >
 
 			<div className="d-flex justify-content-center">
 				<div className="a4-paper shadow bg-white print-area p-4" id='pdf-content'>
