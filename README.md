@@ -1,5 +1,5 @@
 # 파쓰문서
-http://papas-bucket.s3-website.ap-northeast-2.amazonaws.com/
+d21p1u6w2ro5bb.cloudfront.net
 
 
 ## 개발일지
